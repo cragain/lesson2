@@ -15,51 +15,71 @@ x = ''
 y = ''
 z = ''
 
+prompt("Welcome to Calculator!  What is your name?")
+name = ''
+
 loop do
-  prompt("Please provide the first number...")
-  x = gets.chomp.to_f
-
-  if right_num?(x)
-    break
-  else
-    prompt("that is not a valid number, try again..")
+  name = gets.chomp
+  if name.empty?
+    prompt("Please make sure to enter a valid name")
+  else break
   end
-
 end
 
 loop do
-  prompt("Please provide the second number...")
-  y = gets.chomp.to_f
+  loop do
+    prompt("Please provide the first number...")
+    x = gets.chomp.to_f
   
-  if right_num?(y)
-    break
-  else
-    prompt("that is not a valid number, try again...")
-  end
-end
-
-
-loop do
-  prompt("What kind of math do you need? Type a) addition b) subtraction c) multiplication d) division")
-  z = gets.chomp
+    if right_num?(x)
+      break
+    else
+      prompt("that is not a valid number, try again..")
+    end
   
-  if right_math?(z)
-    break
-  else
-    prompt("That is not one of the options, choose a, b, c, or d")
   end
+  
+  loop do
+    prompt("Please provide the second number...")
+    y = gets.chomp.to_f
+    
+    if right_num?(y)
+      break
+    else
+      prompt("that is not a valid number, try again...")
+    end
+  end
+  
+  
+  loop do
+    prompt("What kind of math do you need? Type a) addition b) subtraction c) multiplication d) division")
+    z = gets.chomp
+    
+    if right_math?(z)
+      break
+    else
+      prompt("That is not one of the options, choose a, b, c, or d")
+    end
+  end
+  
+  
+  answer = case z 
+           when 'a'
+             x + y 
+           when 'b'
+             x - y 
+           when 'c'
+             x * y 
+           when 'd'
+             x / y 
+  end
+  
+  prompt(answer)
+
+  prompt("Do you need to run me again? (Y/N)")
+  again = gets.chomp
+
+  break unless again.downcase.start_with?('y')
 end
 
-
-answer = case z 
-         when 'a'
-           x + y 
-         when 'b'
-           x - y 
-         when 'c'
-           x * y 
-         when 'd'
-           x / y 
-end
-
-prompt(answer)
+prompt("Then have a great day!")
