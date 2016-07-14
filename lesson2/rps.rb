@@ -1,22 +1,22 @@
 def prompt(message)
-  puts ("=> #{message}")
+  puts "=> #{message}"
 end
 
 def win(player_choice, computer_choice)
-    if player_choice == 'r' && computer_choice == 'p' 
-      puts "Sorry, paper covers rock, you lose"
-    elsif player_choice == 'r' && computer_choice == 'scissors'
-      puts "Yeah, rock cracks scissors, you win!"
-    elsif player_choice == 's' && computer_choice == 'paper'
-      puts "Yeah, sissors cuts paper, you win!"
-    elsif player_choice == 's' && computer_choice == 'rock' 
-      puts "Oh no, rock cracks scissors, you lose!"
-    elsif player_choice == 'p' && computer_choice == 'rock' 
-      puts "Yeah, paper covers rock, you win!"
-    elsif player_choice == 'p' && computer_choice == 'scissors' 
-      puts "Oh no, scissors cut paper, you lose!"
-    else puts "Its a tie!  It happens!!!"
-    end
+  if player_choice == 'r' && computer_choice == 'p' 
+    puts "Sorry, paper covers rock, you lose"
+  elsif player_choice == 'r' && computer_choice == 'scissors'
+    puts "Yeah, rock cracks scissors, you win!"
+  elsif player_choice == 's' && computer_choice == 'paper'
+    puts "Yeah, sissors cuts paper, you win!"
+  elsif player_choice == 's' && computer_choice == 'rock' 
+    puts "Oh no, rock cracks scissors, you lose!"
+  elsif player_choice == 'p' && computer_choice == 'rock' 
+    puts "Yeah, paper covers rock, you win!"
+  elsif player_choice == 'p' && computer_choice == 'scissors' 
+    puts "Oh no, scissors cut paper, you lose!"
+  else puts "Its a tie!  It happens!!!"
+  end
 end
 
 computer_choice = ['rock', 'paper', 'scissors'].sample
