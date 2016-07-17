@@ -1,6 +1,5 @@
 require 'pry'
 
-
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -23,7 +22,7 @@ end
 
 def initialize_board
   board_spaces = {}
-  (1..9).each {|num| board_spaces[num] = INITIAL_MARKER}
+  (1..9).each { |num| board_spaces[num] = INITIAL_MARKER }
   board_spaces
 end
 
@@ -32,10 +31,8 @@ board_spaces = initialize_board
 display_board(board_spaces)
 
 def empty_board_spaces(brd)
-  brd.select{|num, val| val == ' '}.keys
+  brd.select { |_num, val| val == ' ' }.keys
 end
-
-
 
 def player_places_piece(brd)
   square = ''
@@ -45,7 +42,7 @@ def player_places_piece(brd)
     if empty_board_spaces(brd).include?(square)
       break
     else
-      puts "That is not an empty square"
+      puts 'That is not an empty square'
     end
   end
   
@@ -62,7 +59,7 @@ def player_spaces(brd)
 end
 
 def computer_spaces(brd)
-  brd.select {|key, value| value == "O"}.keys
+  brd.select {|_key, value| value == "O"}.keys
 end
 
 def any_winner?(brd)
