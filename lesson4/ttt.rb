@@ -34,10 +34,15 @@ def empty_board_spaces(brd)
   brd.select { |_num, val| val == ' ' }.keys
 end
 
+def joinor(arr, delimiter=', ', word='or')
+  arr[-1] = "#{word} #{arr.last}" if arr.size > 1
+  arr.size == 2 ? arr.join(' ') : arr.join(delimiter)
+end
+
 def player_places_piece(brd)
   square = ''
   loop do
-    puts "=> Choose a square (#{empty_board_spaces(brd)})"
+    puts "=> Choose a square (#{joinor(empty_board_spaces(brd))})"
     square = gets.chomp.to_i
     if empty_board_spaces(brd).include?(square)
       break
@@ -92,3 +97,20 @@ if any_winner?(board_spaces)
   puts "Congrats #{detect_winner(board_spaces)} you won!"
 else puts "Its a tie!"
 end
+
+
+def game_score_increase(brd)
+  player_score = 0
+  computer_score = 0 
+  if detect_winner(brd) == 'Player'
+    player_score += 1
+  else detect_winner(brd) == 'Computer'
+    computer_score += 1
+  end
+  puts "Player has #{player_score} points"
+  puts "Computer has #{computer_score} points" 
+end
+
+begin  
+  game_score_increase(board_spaces)
+end until player_score == 5 || computer_score == 5
