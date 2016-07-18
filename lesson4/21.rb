@@ -19,12 +19,28 @@ def card_value(hand)
    end
    
    values.select { |value| value == "A" }.count.times do
-    sum -= 10 if sum > 21
+    amount -= 10 if amount > 21
   end
   
   amount
 end
-   
+
+def busted_hand(hand)
+  if card_value(hand) > 21
+    puts "Whoops, you busted.  Game Over"
+  end
+end
+
+def declare_winner(phand, chand)
+  if phand > chand
+    puts "Good Job Player, you win!"
+  elsif chand > phand
+    puts "Oh no, Computer got ya"
+  else
+    puts "Looks like it is a tie, no blood"
+  end
+end
+      
 
 # Game Starts
 
@@ -41,30 +57,46 @@ p computer_hand[0]
 
 # Player turn
 
-if player_hand == 21
-  puts "You got BlackJack!"
-else
-  puts "Would you like to hit(h) or stay(s)?"
-    hit_stay1 = gets.chomp
-   
-end
-
-
-  if hit_stay1.downcase == 'h'
-    player_hand << deck.shift(1)
-  elsif hit_stay1.downcase == 's'
-    puts "Player decides to stay"
-  else puts "That is not a valid entry"
+loop do
+  hit_stay = nil
+  loop do
+    puts "Would you like to hit(h) or stay(s)?"
+      hit_stay = gets.chomp
+    break if hit_stay.downcase == 'h' or hit_stay.downcase == 's'
+    puts "That is not a valid choice"
   end
 
 
-p player_hand
-p card_value(player_hand)
-
-
-
-
+  if hit_stay == 'h'
+    player_hand << deck.shift(1)
+    puts "Player now has #{player_hand} and a total of #{card_value(player_hand)}"
+    busted_hand(player_hand)
+  end
+  
+break if hit_stay == 's' || card_value(player_hand) > 21
+end
 
 # Computer turn
 
+  if card_value(computer_hand) < 17
+    loop do
+      computer_hand << deck.shift(1)
+    break if card_value(computer_hand) > 16
+    end
+  end
+  if card_value(computer_hand) > 21
+    puts "Computer Busted, You Win!"
+    puts "Computer drew #{computer_hand} with a total of #{card_value(computer_hand)}"
+  end
+
+
+# Determine Winner
+
+if card_value(player_hand) < 22 && card_value(computer_hand) < 22
+  puts "Lets see who won"
+  puts "Player has #{player_hand} for a total of #{card_value(player_hand)}"
+  puts "Computer has #{computer_hand} for a total of #{card_value(computer_hand)}"
+  declare_winner(card_value(player_hand), card_value(computer_hand))
+else puts "Thanks for Playing!"
+end
 
