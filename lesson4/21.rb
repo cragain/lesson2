@@ -18,17 +18,16 @@ def card_value(hand)
      end
    end
    
-   values.select { |value| value == "A" }.count.times do
+   values.select { |value| value == 'A' }.count.times do
     amount -= 10 if amount > 21
-  end
+end
   
-  amount
+amount
 end
 
 def busted_hand(hand)
-  if card_value(hand) > 21
-    puts "Whoops, you busted.  Game Over"
-  end
+  return unless card_value(hand) > 21
+    puts 'Whoops, you busted.  Game Over'
 end
 
 def declare_winner(phand, chand)
@@ -61,8 +60,8 @@ loop do
   hit_stay = nil
   loop do
     puts "Would you like to hit(h) or stay(s)?"
-      hit_stay = gets.chomp
-    break if hit_stay.downcase == 'h' or hit_stay.downcase == 's'
+    hit_stay = gets.chomp
+    break if hit_stay.downcase == 'h' || hit_stay.downcase == 's'
     puts "That is not a valid choice"
   end
 
